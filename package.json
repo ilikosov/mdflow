@@ -1,0 +1,12 @@
+{
+  "name": "mdflow",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@mdflow/ui",
+    "build": "npm run build --workspace=@mdflow/ui",
+    "dev:server": "npm run dev --workspace=@mdflow/server"
+  }
+}
