@@ -6,7 +6,7 @@ export function markdownToHtml(markdown: string): string {
 
   // Extract code blocks before escaping HTML
   const codeBlocks: string[] = [];
-  html = html.replace(/```([^\n`]*)\n?([\s\S]*?)```/g, (match, language, code) => {
+  html = html.replace(/```([^\n`]*)\n?([\s\S]*?)```/g, (_match, language, code) => {
     const lang = (language || '').trim() || 'text';
     const placeholder = `\n__CODE_BLOCK_${codeBlocks.length}__\n`;
 

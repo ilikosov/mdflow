@@ -1,5 +1,4 @@
 import type { KanbanData, Task, Config } from '@mdflow/types';
-import { defaultConfig } from '@mdflow/types';
 
 // Parse Markdown content to KanbanData (port of parseMarkdown and parseTasksFromSection)
 export function parseMarkdown(content: string): KanbanData {

@@ -1,5 +1,5 @@
 import { signal, computed } from '@preact/signals';
-import type { Task, Config, KanbanData } from '@mdflow/types';
+import type { Task, Config } from '@mdflow/types';
 import { defaultConfig } from '@mdflow/types';
 
 // Global signals for reactive state
