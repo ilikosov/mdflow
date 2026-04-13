@@ -13,6 +13,14 @@ export const errorSignal = signal<string | null>(null);
 export const activeFiltersSignal = signal<Array<{ type: string; value: string }>>([]);
 export const searchTermSignal = signal<string>('');
 
+// Modal control signals
+export const selectedTaskIdSignal = signal<string | null>(null);
+export const editingTaskIdSignal = signal<string | null>(null);
+export const taskDetailModalOpenSignal = signal(false);
+export const taskFormModalOpenSignal = signal(false);
+export const archiveModalOpenSignal = signal(false);
+export const columnsModalOpenSignal = signal(false);
+
 // Computed: filtered tasks based on active filters and search term
 export const filteredTasksSignal = computed(() => {
   const tasks = tasksSignal.value;
