@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/preact';
 import { describe, it, expect, vi } from 'vitest';
 import { FilterBar } from './FilterBar';
-import { 
-  activeFiltersSignal, 
-  searchTermSignal, 
+import {
+  activeFiltersSignal,
+  searchTermSignal,
   configSignal,
   tasksSignal,
   archivedTasksSignal,
@@ -47,13 +47,16 @@ describe('FilterBar', () => {
       users: ['user1'],
       priorities: ['🔴 Urgent'],
     };
-    
+
     render(<FilterBar />);
-    
+
     // Test tag filter
     const tagSelect = screen.getByLabelText(/filters.tags/i);
     fireEvent.change(tagSelect, { target: { value: 'urgent' } });
-    expect(activeFiltersSignal.value).toContainEqual({ type: 'tag', value: 'urgent' });
+    expect(activeFiltersSignal.value).toContainEqual({
+      type: 'tag',
+      value: 'urgent',
+    });
   });
 
   it('displays active filter chips', () => {
@@ -61,7 +64,7 @@ describe('FilterBar', () => {
       { type: 'tag', value: 'urgent' },
       { type: 'category', value: 'Feature' },
     ];
-    
+
     render(<FilterBar />);
     expect(screen.getByText(/#urgent/i)).toBeInTheDocument();
     expect(screen.getByText(/feature/i)).toBeInTheDocument();
@@ -69,7 +72,7 @@ describe('FilterBar', () => {
 
   it('removes filter when clicking remove button on chip', () => {
     activeFiltersSignal.value = [{ type: 'tag', value: 'urgent' }];
-    
+
     render(<FilterBar />);
     const removeButton = screen.getByText(/#urgent/i).nextSibling as HTMLElement;
     fireEvent.click(removeButton);
@@ -79,9 +82,11 @@ describe('FilterBar', () => {
   it('clears all filters and search when clicking Clear all button', () => {
     activeFiltersSignal.value = [{ type: 'tag', value: 'urgent' }];
     searchTermSignal.value = 'test';
-    
+
     render(<FilterBar />);
-    const clearButton = screen.getByRole('button', { name: /filters.clearall/i });
+    const clearButton = screen.getByRole('button', {
+      name: /filters.clearall/i,
+    });
     fireEvent.click(clearButton);
     expect(activeFiltersSignal.value).toHaveLength(0);
     expect(searchTermSignal.value).toBe('');
@@ -109,9 +114,9 @@ describe('FilterBar', () => {
       users: ['alice', 'bob'],
       priorities: ['🔴 Urgent', '🟢 Low'],
     };
-    
+
     render(<FilterBar />);
-    
+
     const tagSelect = screen.getByLabelText(/filters.tags/i);
     expect(tagSelect).toContainHTML('urgent');
     expect(tagSelect).toContainHTML('help-needed');

@@ -11,10 +11,5 @@ export function Spinner({ size = 'medium' }: SpinnerProps) {
     large: '32px',
   };
 
-  return (
-    <span 
-      class="spinner" 
-      style={{ width: sizeMap[size], height: sizeMap[size] }} 
-    />
-  );
+  return <span class="spinner" style={{ width: sizeMap[size], height: sizeMap[size] }} />;
 }

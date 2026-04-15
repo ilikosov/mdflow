@@ -26,9 +26,7 @@ function getPriorityClass(priority: string): string {
 export function TaskDetailModal() {
   const isOpen = taskDetailModalOpenSignal.value;
   const selectedTaskId = selectedTaskIdSignal.value;
-  const task = selectedTaskId 
-    ? tasksSignal.value.find((t) => t.id === selectedTaskId) || null
-    : null;
+  const task = selectedTaskId ? tasksSignal.value.find(t => t.id === selectedTaskId) || null : null;
 
   if (!isOpen || !task) return null;
 
@@ -48,10 +46,10 @@ export function TaskDetailModal() {
       const newArchived = [...archivedTasksSignal.value, task];
       await archiveApi.put(newArchived);
       archivedTasksSignal.value = newArchived;
-      
-      const newTasks = tasksSignal.value.filter((t) => t.id !== task.id);
+
+      const newTasks = tasksSignal.value.filter(t => t.id !== task.id);
       tasksSignal.value = newTasks;
-      
+
       taskDetailModalOpenSignal.value = false;
       selectedTaskIdSignal.value = null;
     }
@@ -59,30 +57,29 @@ export function TaskDetailModal() {
 
   const handleDelete = async () => {
     if (confirm(t('confirm.deleteTask', { title: task.title }))) {
-      const newTasks = tasksSignal.value.filter((t) => t.id !== task.id);
+      const newTasks = tasksSignal.value.filter(t => t.id !== task.id);
       tasksSignal.value = newTasks;
-      
+
       taskDetailModalOpenSignal.value = false;
       selectedTaskIdSignal.value = null;
     }
   };
 
   const priorityClass = getPriorityClass(task.priority);
-  const completedSubtasks = task.subtasks.filter((st) => st.completed).length;
+  const completedSubtasks = task.subtasks.filter(st => st.completed).length;
   const totalSubtasks = task.subtasks.length;
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose} title={t('taskDetail.title')}>
       <div class="task-detail">
         <h3 style={{ marginBottom: '1rem' }}>{task.title}</h3>
-        
+
         <p>
           <strong>{t('meta.priority')}:</strong>{' '}
           <span class={`badge badge-priority ${priorityClass}`}>{task.priority}</span>
         </p>
         <p>
-          <strong>{t('meta.status')}:</strong>{' '}
-          {task.status}
+          <strong>{t('meta.status')}:</strong> {task.status}
         </p>
         {task.category && (
           <p>
@@ -127,7 +124,13 @@ export function TaskDetailModal() {
         )}
         {totalSubtasks > 0 && (
           <div style={{ marginTop: '1rem' }}>
-            <strong>{t('meta.subtasks', { completed: String(completedSubtasks), total: String(totalSubtasks) })}:</strong>
+            <strong>
+              {t('meta.subtasks', {
+                completed: String(completedSubtasks),
+                total: String(totalSubtasks),
+              })}
+              :
+            </strong>
             <ul style={{ marginTop: '0.5rem', paddingLeft: '1.5rem' }}>
               {task.subtasks.map((st, i) => (
                 <li key={i} style={{ textDecoration: st.completed ? 'line-through' : 'none' }}>

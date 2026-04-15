@@ -25,7 +25,10 @@ export function markdownToHtml(markdown: string): string {
   html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
   // Convert **Bold subsections** with colon
-  html = html.replace(/\*\*([^*]+)\*\*:/g, '<strong style="color: var(--primary); display: block; margin-top: 1rem; margin-bottom: 0.5rem;">$1:</strong>');
+  html = html.replace(
+    /\*\*([^*]+)\*\*:/g,
+    '<strong style="color: var(--primary); display: block; margin-top: 1rem; margin-bottom: 0.5rem;">$1:</strong>'
+  );
 
   // Convert **Bold** (remaining)
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
@@ -34,10 +37,16 @@ export function markdownToHtml(markdown: string): string {
   html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
 
   // Convert `inline code`
-  html = html.replace(/`([^`]+)`/g, '<code style="background: #2d2d2d; color: #f8f8f2; padding: 0.125rem 0.35rem; border-radius: 3px; font-family: \'Consolas\', \'Monaco\', monospace; font-size: 0.9em;">$1</code>');
+  html = html.replace(
+    /`([^`]+)`/g,
+    "<code style=\"background: #2d2d2d; color: #f8f8f2; padding: 0.125rem 0.35rem; border-radius: 3px; font-family: 'Consolas', 'Monaco', monospace; font-size: 0.9em;\">$1</code>"
+  );
 
   // Convert links [text](url)
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color: var(--primary); text-decoration: underline;">$1</a>');
+  html = html.replace(
+    /\[([^\]]+)\]\(([^)]+)\)/g,
+    '<a href="$2" target="_blank" style="color: var(--primary); text-decoration: underline;">$1</a>'
+  );
 
   // Convert bullet lists and paragraphs
   const lines = html.split('\n');

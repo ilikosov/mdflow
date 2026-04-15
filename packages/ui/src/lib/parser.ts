@@ -9,7 +9,7 @@ export function parseMarkdown(content: string): KanbanData {
     categories: [],
     users: [],
     priorities: [],
-    tags: []
+    tags: [],
   };
 
   // Parse config comment
@@ -26,37 +26,52 @@ export function parseMarkdown(content: string): KanbanData {
     // Parse columns
     const columnsMatch = configText.match(/\*\*Columns\*\*:\s*(.+)/);
     if (columnsMatch) {
-      config.columns = columnsMatch[1].split('|').map(col => {
-        const match = col.trim().match(/(.+?)\s*\((.+?)\)/);
-        if (match) {
-          return { name: match[1].trim(), id: match[2].trim() };
-        }
-        return null;
-      }).filter(Boolean) as Array<{ name: string; id: string }>;
+      config.columns = columnsMatch[1]
+        .split('|')
+        .map(col => {
+          const match = col.trim().match(/(.+?)\s*\((.+?)\)/);
+          if (match) {
+            return { name: match[1].trim(), id: match[2].trim() };
+          }
+          return null;
+        })
+        .filter(Boolean) as Array<{ name: string; id: string }>;
     }
 
     // Parse categories
     const categoriesMatch = configText.match(/\*\*Categories\*\*:\s*(.+)/);
     if (categoriesMatch) {
-      config.categories = categoriesMatch[1].split(',').map(c => c.trim()).filter(Boolean);
+      config.categories = categoriesMatch[1]
+        .split(',')
+        .map(c => c.trim())
+        .filter(Boolean);
     }
 
     // Parse users
     const usersMatch = configText.match(/\*\*Users\*\*:\s*(.+)/);
     if (usersMatch) {
-      config.users = usersMatch[1].split(',').map(u => u.trim()).filter(Boolean);
+      config.users = usersMatch[1]
+        .split(',')
+        .map(u => u.trim())
+        .filter(Boolean);
     }
 
     // Parse priorities
     const prioritiesMatch = configText.match(/\*\*Priorities\*\*:\s*(.+)/);
     if (prioritiesMatch) {
-      config.priorities = prioritiesMatch[1].split('|').map(p => p.trim()).filter(Boolean);
+      config.priorities = prioritiesMatch[1]
+        .split('|')
+        .map(p => p.trim())
+        .filter(Boolean);
     }
 
     // Parse tags
     const tagsMatch = configText.match(/\*\*Tags\*\*:\s*(.+)/);
     if (tagsMatch) {
-      config.tags = tagsMatch[1].split(/\s+/).filter(t => t.startsWith('#')).map(t => t.replace('#', ''));
+      config.tags = tagsMatch[1]
+        .split(/\s+/)
+        .filter(t => t.startsWith('#'))
+        .map(t => t.replace('#', ''));
     }
   }
 
@@ -66,7 +81,7 @@ export function parseMarkdown(content: string): KanbanData {
       { name: '📝 To Do', id: 'todo' },
       { name: '🚀 In Progress', id: 'in-progress' },
       { name: '👀 In Review', id: 'in-review' },
-      { name: '✅ Done', id: 'done' }
+      { name: '✅ Done', id: 'done' },
     ];
   }
 
@@ -156,11 +171,13 @@ function parseTask(id: string, title: string, content: string, status: string): 
     completed: '',
     description: '',
     subtasks: [],
-    notes: ''
+    notes: '',
   };
 
   // Parse metadata line
-  const metaMatch = content.match(/\*\*Priority\*\*:\s*(\w+)\s*\|\s*\*\*Category\*\*:\s*([^|]+?)(?:\s*\|\s*\*\*Assigned\*\*:\s*(.+?))?$/m);
+  const metaMatch = content.match(
+    /\*\*Priority\*\*:\s*(\w+)\s*\|\s*\*\*Category\*\*:\s*([^|]+?)(?:\s*\|\s*\*\*Assigned\*\*:\s*(.+?))?$/m
+  );
   if (metaMatch) {
     task.priority = metaMatch[1].trim();
     task.category = metaMatch[2].trim();
@@ -214,7 +231,7 @@ function parseTask(id: string, title: string, content: string, status: string): 
   for (const match of subtaskMatches) {
     task.subtasks.push({
       completed: match[1] === 'x',
-      text: match[2].trim()
+      text: match[2].trim(),
     });
   }
 

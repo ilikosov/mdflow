@@ -3,7 +3,7 @@ import * as v from 'valibot';
 // Subtask schema
 export const SubtaskSchema = v.object({
   completed: v.boolean(),
-  text: v.string()
+  text: v.string(),
 });
 export type Subtask = v.InferOutput<typeof SubtaskSchema>;
 
@@ -22,14 +22,14 @@ export const TaskSchema = v.object({
   completed: v.string(),
   description: v.string(),
   subtasks: v.array(SubtaskSchema),
-  notes: v.string()
+  notes: v.string(),
 });
 export type Task = v.InferOutput<typeof TaskSchema>;
 
 // Column schema
 export const ColumnSchema = v.object({
   name: v.string(),
-  id: v.string()
+  id: v.string(),
 });
 export type Column = v.InferOutput<typeof ColumnSchema>;
 
@@ -40,14 +40,14 @@ export const ConfigSchema = v.object({
   categories: v.array(v.string()),
   users: v.array(v.string()),
   priorities: v.array(v.string()),
-  tags: v.array(v.string())
+  tags: v.array(v.string()),
 });
 export type Config = v.InferOutput<typeof ConfigSchema>;
 
 // KanbanData schema (tasks + config)
 export const KanbanDataSchema = v.object({
   tasks: v.array(TaskSchema),
-  config: ConfigSchema
+  config: ConfigSchema,
 });
 export type KanbanData = v.InferOutput<typeof KanbanDataSchema>;
 
@@ -58,10 +58,10 @@ export const defaultConfig: Config = {
     { name: '📝 To Do', id: 'todo' },
     { name: '🚀 In Progress', id: 'in-progress' },
     { name: '👀 In Review', id: 'in-review' },
-    { name: '✅ Done', id: 'done' }
+    { name: '✅ Done', id: 'done' },
   ],
   categories: ['Frontend', 'Backend', 'Design', 'DevOps', 'Tests', 'Documentation'],
   users: ['@user (User)'],
   priorities: ['🔴 Critical', '🟠 High', '🟡 Medium', '🟢 Low'],
-  tags: ['bug', 'feature', 'ui', 'backend', 'urgent', 'refactor', 'docs', 'test']
+  tags: ['bug', 'feature', 'ui', 'backend', 'urgent', 'refactor', 'docs', 'test'],
 };

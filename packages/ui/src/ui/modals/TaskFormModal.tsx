@@ -38,7 +38,7 @@ export function TaskFormModal() {
   // Load task data when editing
   useEffect(() => {
     if (editingTaskId) {
-      const task = tasksSignal.value.find((t) => t.id === editingTaskId);
+      const task = tasksSignal.value.find(t => t.id === editingTaskId);
       if (task) {
         setFormData({
           title: task.title,
@@ -84,15 +84,21 @@ export function TaskFormModal() {
 
   const handleSubmit = async (e: Event) => {
     e.preventDefault();
-    
+
     const task: Task = {
       id: editingTaskId || `TASK-${String(config.lastTaskId + 1).padStart(3, '0')}`,
       title: formData.title,
       status: formData.status,
       priority: formData.priority,
       category: formData.category,
-      assignees: formData.assignees.split(',').map((a) => a.trim()).filter(Boolean),
-      tags: formData.tags.split(/\s+/).filter(Boolean).map((t) => t.replace(/^#/, '')),
+      assignees: formData.assignees
+        .split(',')
+        .map(a => a.trim())
+        .filter(Boolean),
+      tags: formData.tags
+        .split(/\s+/)
+        .filter(Boolean)
+        .map(t => t.replace(/^#/, '')),
       created: formData.created,
       started: formData.started,
       due: formData.due,
@@ -104,7 +110,7 @@ export function TaskFormModal() {
 
     if (editingTaskId) {
       // Update existing task
-      const newTasks = tasksSignal.value.map((t) => (t.id === task.id ? task : t));
+      const newTasks = tasksSignal.value.map(t => (t.id === task.id ? task : t));
       tasksSignal.value = newTasks;
     } else {
       // Create new task
@@ -144,9 +150,9 @@ export function TaskFormModal() {
   };
 
   return (
-    <Modal 
-      isOpen={isOpen} 
-      onClose={handleClose} 
+    <Modal
+      isOpen={isOpen}
+      onClose={handleClose}
       title={editingTaskId ? t('taskForm.editTask') : t('taskForm.newTask')}
     >
       <form onSubmit={handleSubmit}>
@@ -156,16 +162,16 @@ export function TaskFormModal() {
             type="text"
             required
             value={formData.title}
-            onInput={(e) => handleChange('title', (e.target as HTMLInputElement).value)}
+            onInput={e => handleChange('title', (e.target as HTMLInputElement).value)}
           />
         </div>
         <div class="form-group">
           <label>{t('taskForm.columnLabel')}</label>
           <select
             value={formData.status}
-            onInput={(e) => handleChange('status', (e.target as HTMLSelectElement).value)}
+            onInput={e => handleChange('status', (e.target as HTMLSelectElement).value)}
           >
-            {config.columns.map((col) => (
+            {config.columns.map(col => (
               <option key={col.id} value={col.id}>
                 {col.name}
               </option>
@@ -176,10 +182,10 @@ export function TaskFormModal() {
           <label>{t('taskForm.priorityLabel')}</label>
           <select
             value={formData.priority}
-            onInput={(e) => handleChange('priority', (e.target as HTMLSelectElement).value)}
+            onInput={e => handleChange('priority', (e.target as HTMLSelectElement).value)}
           >
             <option value="">{t('taskForm.priorityNone')}</option>
-            {config.priorities.map((pri) => (
+            {config.priorities.map(pri => (
               <option key={pri} value={pri}>
                 {pri}
               </option>
@@ -193,10 +199,10 @@ export function TaskFormModal() {
             placeholder={t('taskForm.categoryPlaceholder')}
             list="categoryOptions"
             value={formData.category}
-            onInput={(e) => handleChange('category', (e.target as HTMLInputElement).value)}
+            onInput={e => handleChange('category', (e.target as HTMLInputElement).value)}
           />
           <datalist id="categoryOptions">
-            {config.categories.map((cat) => (
+            {config.categories.map(cat => (
               <option key={cat} value={cat} />
             ))}
           </datalist>
@@ -208,10 +214,10 @@ export function TaskFormModal() {
             placeholder={t('taskForm.assignedPlaceholder')}
             list="userOptions"
             value={formData.assignees}
-            onInput={(e) => handleChange('assignees', (e.target as HTMLInputElement).value)}
+            onInput={e => handleChange('assignees', (e.target as HTMLInputElement).value)}
           />
           <datalist id="userOptions">
-            {config.users.map((user) => (
+            {config.users.map(user => (
               <option key={user} value={user} />
             ))}
           </datalist>
@@ -222,7 +228,7 @@ export function TaskFormModal() {
             <input
               type="date"
               value={formData.created}
-              onInput={(e) => handleChange('created', (e.target as HTMLInputElement).value)}
+              onInput={e => handleChange('created', (e.target as HTMLInputElement).value)}
             />
           </div>
           <div class="form-group">
@@ -230,7 +236,7 @@ export function TaskFormModal() {
             <input
               type="date"
               value={formData.started}
-              onInput={(e) => handleChange('started', (e.target as HTMLInputElement).value)}
+              onInput={e => handleChange('started', (e.target as HTMLInputElement).value)}
             />
           </div>
           <div class="form-group">
@@ -238,7 +244,7 @@ export function TaskFormModal() {
             <input
               type="date"
               value={formData.due}
-              onInput={(e) => handleChange('due', (e.target as HTMLInputElement).value)}
+              onInput={e => handleChange('due', (e.target as HTMLInputElement).value)}
             />
           </div>
           <div class="form-group">
@@ -246,7 +252,7 @@ export function TaskFormModal() {
             <input
               type="date"
               value={formData.completed}
-              onInput={(e) => handleChange('completed', (e.target as HTMLInputElement).value)}
+              onInput={e => handleChange('completed', (e.target as HTMLInputElement).value)}
             />
           </div>
         </div>
@@ -257,11 +263,11 @@ export function TaskFormModal() {
             placeholder={t('taskForm.tagsPlaceholder')}
             list="tagOptions"
             value={formData.tags}
-            onInput={(e) => handleChange('tags', (e.target as HTMLInputElement).value)}
+            onInput={e => handleChange('tags', (e.target as HTMLInputElement).value)}
           />
           <small style={{ color: 'var(--text-secondary)' }}>{t('taskForm.tagsHelp')}</small>
           <datalist id="tagOptions">
-            {config.tags.map((tag) => (
+            {config.tags.map(tag => (
               <option key={tag} value={`#${tag}`} />
             ))}
           </datalist>
@@ -271,7 +277,7 @@ export function TaskFormModal() {
           <textarea
             rows={3}
             value={formData.description}
-            onInput={(e) => handleChange('description', (e.target as HTMLTextAreaElement).value)}
+            onInput={e => handleChange('description', (e.target as HTMLTextAreaElement).value)}
           />
         </div>
         <div class="form-group">
@@ -281,8 +287,8 @@ export function TaskFormModal() {
               type="text"
               placeholder={t('taskForm.subtaskPlaceholder')}
               value={newSubtask}
-              onInput={(e) => setNewSubtask((e.target as HTMLInputElement).value)}
-              onKeyDown={(e) => {
+              onInput={e => setNewSubtask((e.target as HTMLInputElement).value)}
+              onKeyDown={e => {
                 if (e.key === 'Enter') {
                   e.preventDefault();
                   handleAddSubtask();
@@ -317,7 +323,12 @@ export function TaskFormModal() {
                   <button
                     type="button"
                     onClick={() => handleRemoveSubtask(i)}
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#EF4444' }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      color: '#EF4444',
+                    }}
                   >
                     🗑️
                   </button>
@@ -332,7 +343,7 @@ export function TaskFormModal() {
             rows={5}
             placeholder={t('taskForm.notesPlaceholder')}
             value={formData.notes}
-            onInput={(e) => handleChange('notes', (e.target as HTMLTextAreaElement).value)}
+            onInput={e => handleChange('notes', (e.target as HTMLTextAreaElement).value)}
           />
           <small style={{ color: 'var(--text-secondary)' }}>{t('taskForm.notesHelp')}</small>
         </div>

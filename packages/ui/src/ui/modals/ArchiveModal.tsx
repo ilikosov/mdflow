@@ -6,11 +6,7 @@ import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 import { Badge } from '../components/Badge';
 import { getFirstEmoji, priorityIconClasses } from '../../lib/utils';
-import {
-  archivedTasksSignal,
-  archiveModalOpenSignal,
-  tasksSignal,
-} from '../../signals/state';
+import { archivedTasksSignal, archiveModalOpenSignal, tasksSignal } from '../../signals/state';
 import { archiveApi } from '../../api/client';
 
 function getPriorityClass(priority: string): string {
@@ -23,7 +19,7 @@ export function ArchiveModal() {
   const [search, setSearch] = useState('');
 
   const filteredArchives = archivedTasksSignal.value.filter(
-    (task) =>
+    task =>
       task.title.toLowerCase().includes(search.toLowerCase()) ||
       task.description.toLowerCase().includes(search.toLowerCase()) ||
       task.notes.toLowerCase().includes(search.toLowerCase())
@@ -37,17 +33,17 @@ export function ArchiveModal() {
   };
 
   const handleRestore = async (task: Task) => {
-    const newArchived = archivedTasksSignal.value.filter((t) => t.id !== task.id);
+    const newArchived = archivedTasksSignal.value.filter(t => t.id !== task.id);
     await archiveApi.put(newArchived);
     archivedTasksSignal.value = newArchived;
-    
+
     const newTasks = [...tasksSignal.value, task];
     tasksSignal.value = newTasks;
   };
 
   const handleDelete = async (task: Task) => {
     if (confirm(t('confirm.deleteTaskFromArchive', { title: task.title }))) {
-      const newArchived = archivedTasksSignal.value.filter((t) => t.id !== task.id);
+      const newArchived = archivedTasksSignal.value.filter(t => t.id !== task.id);
       await archiveApi.put(newArchived);
       archivedTasksSignal.value = newArchived;
     }
@@ -60,7 +56,7 @@ export function ArchiveModal() {
           type="text"
           placeholder={t('archives.search')}
           value={search}
-          onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
+          onInput={e => setSearch((e.target as HTMLInputElement).value)}
           style={{
             width: '100%',
             padding: '0.75rem',
@@ -74,7 +70,7 @@ export function ArchiveModal() {
         <div class="empty-state">{t('archives.empty')}</div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          {filteredArchives.map((task) => (
+          {filteredArchives.map(task => (
             <div
               key={task.id}
               style={{

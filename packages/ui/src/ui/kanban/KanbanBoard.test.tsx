@@ -59,16 +59,16 @@ describe('KanbanColumn', () => {
 
   it('updates task status on drop', async () => {
     tasksSignal.value = [mockTasks[0]];
-    
+
     render(<KanbanColumn column={mockColumn} tasks={mockTasks} />);
     const column = document.querySelector('.kanban-column') as HTMLElement;
-    
+
     const mockDataTransfer = { getData: vi.fn().mockReturnValue('TASK-001') };
     const dropEvent = new Event('drop', { bubbles: true, cancelable: true });
     Object.defineProperty(dropEvent, 'dataTransfer', { value: mockDataTransfer });
-    
+
     fireEvent(column, dropEvent);
-    
+
     expect(tasksSignal.value[0].status).toBe('todo');
   });
 });

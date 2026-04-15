@@ -54,7 +54,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'taskForm.subtaskAdd': '+ Add',
     'taskForm.notesLabel': 'Notes',
     'taskForm.notesPlaceholder': 'Technical notes, results, decisions, etc...',
-    'taskForm.notesHelp': 'Markdown supported: **bold**, *italic*, `code`, lists, links, **Subsections**:',
+    'taskForm.notesHelp':
+      'Markdown supported: **bold**, *italic*, `code`, lists, links, **Subsections**:',
     'taskForm.cancel': 'Cancel',
     'taskForm.create': 'Create',
     'taskForm.save': 'Save',
@@ -118,7 +119,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'confirm.deleteColumn': 'Delete this column?',
     'confirm.deleteSubtask': 'Delete this subtask?',
     'confirm.archiveTask': 'Archive task "{title}"?',
-    'confirm.deleteTask': '⚠️ WARNING: Permanently delete task "{title}"?\n\nThis action cannot be undone.',
+    'confirm.deleteTask':
+      '⚠️ WARNING: Permanently delete task "{title}"?\n\nThis action cannot be undone.',
 
     // Subtasks
     'subtask.newPlaceholder': 'New subtask...',
@@ -179,7 +181,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'taskForm.subtaskAdd': '+ Ajouter',
     'taskForm.notesLabel': 'Notes',
     'taskForm.notesPlaceholder': 'Notes techniques, résultats, décisions, etc...',
-    'taskForm.notesHelp': 'Markdown supporté : **gras**, *italique*, `code`, listes, liens, **Sous-sections**:',
+    'taskForm.notesHelp':
+      'Markdown supporté : **gras**, *italique*, `code`, listes, liens, **Sous-sections**:',
     'taskForm.cancel': 'Annuler',
     'taskForm.create': 'Créer',
     'taskForm.save': 'Enregistrer',
@@ -200,7 +203,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'meta.assigned': 'Assigné à',
     'meta.created': 'Date de création',
     'meta.started': 'Date de début',
-    'meta.due': 'Date d\'échéance',
+    'meta.due': "Date d'échéance",
     'meta.completed': 'Date de fin',
     'meta.tags': 'Tags',
     'meta.description': 'Description',
@@ -231,9 +234,9 @@ export const translations: Record<Language, Record<string, string>> = {
     'notif.taskCreated': 'Tâche {id} créée !',
     'notif.taskArchived': 'Tâche archivée !',
     'notif.taskDeleted': 'Tâche supprimée définitivement',
-    'notif.taskRestored': 'Tâche restaurée dans sa colonne d\'origine !',
+    'notif.taskRestored': "Tâche restaurée dans sa colonne d'origine !",
     'notif.saved': 'Enregistré !',
-    'notif.saveError': 'Échec de l\'enregistrement',
+    'notif.saveError': "Échec de l'enregistrement",
     'notif.loadError': 'Échec du chargement',
 
     // Prompts and confirmations
@@ -243,7 +246,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'confirm.deleteColumn': 'Supprimer cette colonne ?',
     'confirm.deleteSubtask': 'Supprimer cette sous-tâche ?',
     'confirm.archiveTask': 'Archiver la tâche "{title}" ?',
-    'confirm.deleteTask': '⚠️ ATTENTION : Supprimer définitivement la tâche "{title}" ?\n\nCette action est irréversible.',
+    'confirm.deleteTask':
+      '⚠️ ATTENTION : Supprimer définitivement la tâche "{title}" ?\n\nCette action est irréversible.',
 
     // Subtasks
     'subtask.newPlaceholder': 'Nouvelle sous-tâche...',

@@ -23,7 +23,7 @@ function displayPriority(priority: string): string {
 
 export function TaskCard({ task, onClick }: TaskCardProps) {
   const priorityClass = getPriorityClass(task.priority);
-  const completedSubtasks = task.subtasks.filter((st) => st.completed).length;
+  const completedSubtasks = task.subtasks.filter(st => st.completed).length;
   const totalSubtasks = task.subtasks.length;
   const progress = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
 
@@ -57,14 +57,12 @@ export function TaskCard({ task, onClick }: TaskCardProps) {
       <div class="task-title">{task.title}</div>
       {task.description && <div class="task-description">{task.description}</div>}
       <div class="task-meta">
-        {task.priority && (
-          <Badge type="priority" value={task.priority} />
-        )}
+        {task.priority && <Badge type="priority" value={task.priority} />}
         {task.category && <Badge type="category" value={task.category} />}
-        {task.assignees.slice(0, 2).map((assignee) => (
+        {task.assignees.slice(0, 2).map(assignee => (
           <Badge key={assignee} type="assignee" value={normalizeUserId(assignee)} />
         ))}
-        {task.tags.slice(0, 3).map((tag) => (
+        {task.tags.slice(0, 3).map(tag => (
           <Badge key={tag} type="tag" value={tag} />
         ))}
       </div>

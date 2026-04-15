@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/preact';
 import { describe, it, expect, vi } from 'vitest';
 import { TaskDetailModal } from './TaskDetailModal';
-import { 
-  taskDetailModalOpenSignal, 
+import {
+  taskDetailModalOpenSignal,
   selectedTaskIdSignal,
   tasksSignal,
   archivedTasksSignal,
@@ -57,7 +57,7 @@ describe('TaskDetailModal', () => {
     taskDetailModalOpenSignal.value = true;
     selectedTaskIdSignal.value = 'TASK-001';
     render(<TaskDetailModal />);
-    
+
     expect(screen.getByText(/test task title/i)).toBeInTheDocument();
     expect(screen.getByText(/this is a test description/i)).toBeInTheDocument();
     expect(screen.getByText(/🔴 urgent/i)).toBeInTheDocument();
@@ -68,7 +68,7 @@ describe('TaskDetailModal', () => {
     taskDetailModalOpenSignal.value = true;
     selectedTaskIdSignal.value = 'TASK-001';
     render(<TaskDetailModal />);
-    
+
     expect(screen.getByText(/user1, user2/i)).toBeInTheDocument();
     expect(screen.getByText(/2024-01-01/i)).toBeInTheDocument();
     expect(screen.getByText(/2024-01-15/i)).toBeInTheDocument();
@@ -79,7 +79,7 @@ describe('TaskDetailModal', () => {
     taskDetailModalOpenSignal.value = true;
     selectedTaskIdSignal.value = 'TASK-001';
     render(<TaskDetailModal />);
-    
+
     expect(screen.getByText(/done subtask/i)).toHaveStyle('text-decoration: line-through');
     expect(screen.getByText(/pending subtask/i)).not.toHaveStyle('text-decoration: line-through');
   });
@@ -88,19 +88,21 @@ describe('TaskDetailModal', () => {
     taskDetailModalOpenSignal.value = true;
     selectedTaskIdSignal.value = 'TASK-001';
     render(<TaskDetailModal />);
-    
+
     // Notes should be rendered as HTML via markdownToHtml
-    expect(document.querySelector('.task-detail')).toContainHTML('<p>This is <strong>bold</strong> text.</p>');
+    expect(document.querySelector('.task-detail')).toContainHTML(
+      '<p>This is <strong>bold</strong> text.</p>'
+    );
   });
 
   it('calls handleClose when close button is clicked', () => {
     taskDetailModalOpenSignal.value = true;
     selectedTaskIdSignal.value = 'TASK-001';
     render(<TaskDetailModal />);
-    
+
     const closeButton = document.querySelector('.close-btn') as HTMLElement;
     fireEvent.click(closeButton);
-    
+
     expect(taskDetailModalOpenSignal.value).toBe(false);
     expect(selectedTaskIdSignal.value).toBe(null);
   });
@@ -109,10 +111,10 @@ describe('TaskDetailModal', () => {
     taskDetailModalOpenSignal.value = true;
     selectedTaskIdSignal.value = 'TASK-001';
     render(<TaskDetailModal />);
-    
+
     const editButton = screen.getByRole('button', { name: /taskdetail.edit/i });
     fireEvent.click(editButton);
-    
+
     expect(editingTaskIdSignal.value).toBe('TASK-001');
     expect(taskDetailModalOpenSignal.value).toBe(false);
     expect(taskFormModalOpenSignal.value).toBe(true);
@@ -123,13 +125,13 @@ describe('TaskDetailModal', () => {
     taskDetailModalOpenSignal.value = true;
     selectedTaskIdSignal.value = 'TASK-001';
     render(<TaskDetailModal />);
-    
+
     const archiveButton = screen.getByRole('button', { name: /taskdetail.archive/i });
     fireEvent.click(archiveButton);
-    
+
     // Wait for async operation
     await new Promise(resolve => setTimeout(resolve, 10));
-    
+
     expect(global.confirm).toHaveBeenCalled();
     expect(archivedTasksSignal.value).toHaveLength(1);
     expect(tasksSignal.value).toHaveLength(0);
@@ -140,10 +142,10 @@ describe('TaskDetailModal', () => {
     taskDetailModalOpenSignal.value = true;
     selectedTaskIdSignal.value = 'TASK-001';
     render(<TaskDetailModal />);
-    
+
     const deleteButton = screen.getByRole('button', { name: /taskdetail.delete/i });
     fireEvent.click(deleteButton);
-    
+
     expect(global.confirm).toHaveBeenCalled();
     expect(tasksSignal.value).toHaveLength(0);
     expect(taskDetailModalOpenSignal.value).toBe(false);
@@ -154,10 +156,10 @@ describe('TaskDetailModal', () => {
     taskDetailModalOpenSignal.value = true;
     selectedTaskIdSignal.value = 'TASK-001';
     render(<TaskDetailModal />);
-    
+
     const archiveButton = screen.getByRole('button', { name: /taskdetail.archive/i });
     fireEvent.click(archiveButton);
-    
+
     expect(archivedTasksSignal.value).toHaveLength(0);
     expect(tasksSignal.value).toHaveLength(1);
   });

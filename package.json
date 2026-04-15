@@ -6,7 +6,22 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspace=@mdflow/ui",
+    "test": "npm run test --workspace=@mdflow/ui",
     "build": "npm run build --workspace=@mdflow/ui",
-    "dev:server": "npm run dev --workspace=@mdflow/server"
+    "dev:server": "npm run dev --workspace=@mdflow/server",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:staged": "prettier --write --list-different",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,scss,md,html}": [
+      "prettier --write"
+    ]
   }
 }

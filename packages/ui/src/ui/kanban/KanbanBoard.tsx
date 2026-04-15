@@ -19,7 +19,7 @@ export function KanbanColumn({ column, tasks, onTaskClick }: KanbanColumnProps) 
     e.preventDefault();
     const taskId = e.dataTransfer?.getData('text/plain');
     if (taskId) {
-      const taskIndex = tasksSignal.value.findIndex((t) => t.id === taskId);
+      const taskIndex = tasksSignal.value.findIndex(t => t.id === taskId);
       if (taskIndex !== -1) {
         const updatedTasks = [...tasksSignal.value];
         updatedTasks[taskIndex] = { ...updatedTasks[taskIndex], status: column.id };
@@ -35,7 +35,7 @@ export function KanbanColumn({ column, tasks, onTaskClick }: KanbanColumnProps) 
         <span class="column-count">{tasks.length}</span>
       </div>
       <div class="task-list">
-        {tasks.map((task) => (
+        {tasks.map(task => (
           <TaskCard key={task.id} task={task} onClick={onTaskClick} />
         ))}
         {tasks.length === 0 && (
@@ -58,15 +58,10 @@ export function KanbanBoard({ onTaskClick }: KanbanBoardProps) {
 
   return (
     <div class="kanban-board">
-      {columns.map((column) => {
-        const tasks = filteredTasks.filter((t) => t.status === column.id);
+      {columns.map(column => {
+        const tasks = filteredTasks.filter(t => t.status === column.id);
         return (
-          <KanbanColumn 
-            key={column.id} 
-            column={column} 
-            tasks={tasks} 
-            onTaskClick={onTaskClick} 
-          />
+          <KanbanColumn key={column.id} column={column} tasks={tasks} onTaskClick={onTaskClick} />
         );
       })}
     </div>

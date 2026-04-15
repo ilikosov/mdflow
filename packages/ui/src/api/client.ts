@@ -8,17 +8,17 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> 
       ...options?.headers,
     },
   });
-  
+
   if (!response.ok) {
     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
   }
-  
+
   return response.json();
 }
 
 export const kanbanApi = {
   get: () => fetchApi<{ tasks: any[]; config: any }>('/kanban'),
-  put: (data: { tasks: any[]; config: any }) => 
+  put: (data: { tasks: any[]; config: any }) =>
     fetchApi('/kanban', { method: 'PUT', body: JSON.stringify(data) }),
 };
 

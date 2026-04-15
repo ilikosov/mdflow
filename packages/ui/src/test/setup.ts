@@ -1,4 +1,5 @@
 import '@testing-library/preact';
+import '@testing-library/jest-dom/vitest';
 
 // Mock i18n module
 vi.mock('../lib/i18n', () => ({
@@ -10,15 +11,19 @@ vi.mock('../lib/i18n', () => ({
 // Mock signals/state module
 vi.mock('../signals/state', () => ({
   tasksSignal: { value: [], subscribe: vi.fn() },
-  configSignal: { 
-    value: { 
-      columns: [{ id: 'todo', name: 'To Do' }, { id: 'inprogress', name: 'In Progress' }, { id: 'done', name: 'Done' }],
+  configSignal: {
+    value: {
+      columns: [
+        { id: 'todo', name: 'To Do' },
+        { id: 'inprogress', name: 'In Progress' },
+        { id: 'done', name: 'Done' },
+      ],
       categories: ['Feature', 'Bug'],
       users: ['user1', 'user2'],
       priorities: ['🔴 Urgent', '🟡 Medium', '🟢 Low'],
       tags: ['urgent', 'help-needed'],
       lastTaskId: 1,
-    } 
+    },
   },
   activeFiltersSignal: { value: [], subscribe: vi.fn() },
   searchTermSignal: { value: '', subscribe: vi.fn() },
@@ -46,7 +51,7 @@ vi.mock('../lib/utils', () => ({
     '🔴': 'Urgent',
     '🟡': 'Medium',
     '🟢': 'Low',
-    'Default': 'Default',
+    Default: 'Default',
   },
 }));
 

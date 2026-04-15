@@ -86,9 +86,9 @@ export function ColumnsModal() {
             >
               ↓
             </Button>
-            <Button 
-              onClick={() => handleDelete(index)} 
-              variant="secondary" 
+            <Button
+              onClick={() => handleDelete(index)}
+              variant="secondary"
               style={{ color: '#EF4444' }}
             >
               🗑️

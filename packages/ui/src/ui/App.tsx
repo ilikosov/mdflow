@@ -169,7 +169,7 @@ export function App() {
 
   return (
     <Fragment>
-      <Header 
+      <Header
         onNewTask={handleNewTask}
         onOpenArchive={handleOpenArchive}
         onOpenColumns={handleOpenColumns}

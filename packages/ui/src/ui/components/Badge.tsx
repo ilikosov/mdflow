@@ -11,7 +11,7 @@ export interface BadgeProps {
 
 export function Badge({ type, value, onClick }: BadgeProps) {
   let className = 'badge';
-  
+
   if (type === 'priority') {
     const emoji = getFirstEmoji(value);
     const colorClass = priorityIconClasses[emoji] || 'Default';
@@ -27,11 +27,7 @@ export function Badge({ type, value, onClick }: BadgeProps) {
   const displayValue = type === 'tag' && !value.startsWith('#') ? `#${value}` : value;
 
   return (
-    <span 
-      class={className} 
-      onClick={onClick}
-      style={onClick ? { cursor: 'pointer' } : undefined}
-    >
+    <span class={className} onClick={onClick} style={onClick ? { cursor: 'pointer' } : undefined}>
       {displayValue}
     </span>
   );

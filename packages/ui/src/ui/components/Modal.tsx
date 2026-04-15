@@ -16,14 +16,12 @@ export function Modal({ isOpen, onClose, title, children, size = 'medium', ...pr
 
   return (
     <div class={`modal ${isOpen ? 'active' : ''}`} onClick={onClose}>
-      <div 
-        class={`modal-content ${sizeClass}`} 
-        onClick={(e) => e.stopPropagation()}
-        {...props}
-      >
+      <div class={`modal-content ${sizeClass}`} onClick={e => e.stopPropagation()} {...props}>
         <div class="modal-header">
           <h2>{title}</h2>
-          <button class="close-btn" onClick={onClose}>×</button>
+          <button class="close-btn" onClick={onClose}>
+            ×
+          </button>
         </div>
         {children}
       </div>

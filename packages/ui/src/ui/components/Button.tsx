@@ -9,16 +9,18 @@ export interface ButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
   icon?: string;
 }
 
-export function Button({ variant = 'secondary', onClick, children, disabled, icon, ...props }: ButtonProps) {
+export function Button({
+  variant = 'secondary',
+  onClick,
+  children,
+  disabled,
+  icon,
+  ...props
+}: ButtonProps) {
   const className = `btn ${variant === 'primary' ? 'btn-primary' : 'btn-secondary'}${props.class ? ` ${props.class}` : ''}`;
-  
+
   return (
-    <button
-      class={className}
-      onClick={onClick}
-      disabled={disabled}
-      {...props}
-    >
+    <button class={className} onClick={onClick} disabled={disabled} {...props}>
       {icon && <span style={{ marginRight: '0.5rem' }}>{icon}</span>}
       {children}
     </button>

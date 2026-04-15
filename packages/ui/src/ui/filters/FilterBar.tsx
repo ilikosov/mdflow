@@ -20,9 +20,13 @@ export function FilterBar() {
   // Collect all unique values from tasks and archived tasks
   const allTasks = [...tasksSignal.value, ...archivedTasksSignal.value];
   const allTags = Array.from(new Set([...config.tags, ...allTasks.flatMap(t => t.tags)]));
-  const allCategories = Array.from(new Set([...config.categories, ...allTasks.map(t => t.category).filter(Boolean)]));
+  const allCategories = Array.from(
+    new Set([...config.categories, ...allTasks.map(t => t.category).filter(Boolean)])
+  );
   const allUsers = Array.from(new Set([...config.users, ...allTasks.flatMap(t => t.assignees)]));
-  const allPriorities = Array.from(new Set([...config.priorities, ...allTasks.map(t => t.priority).filter(Boolean)]));
+  const allPriorities = Array.from(
+    new Set([...config.priorities, ...allTasks.map(t => t.priority).filter(Boolean)])
+  );
 
   const addFilter = (type: string, value: string) => {
     if (value) {
@@ -52,7 +56,13 @@ export function FilterBar() {
     <div class="filter-bar">
       <div class="filter-bar-content">
         {/* Global Search */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: '1rem',
+          }}
+        >
           <div style={{ position: 'relative', maxWidth: '600px', width: '100%' }}>
             <input
               type="text"
@@ -104,10 +114,18 @@ export function FilterBar() {
           }}
         >
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-            <label style={{ fontWeight: 500, fontSize: '0.9rem' }}>{t('filters.tags')}:</label>
+            <label for="filter.tags" style={{ fontWeight: 500, fontSize: '0.9rem' }}>
+              {t('filters.tags')}:
+            </label>
             <select
-              style={{ padding: '0.5rem', border: '1px solid #cbd5e0', borderRadius: '4px', minWidth: '150px' }}
-              onChange={(e) => {
+              id="filter.tags"
+              style={{
+                padding: '0.5rem',
+                border: '1px solid #cbd5e0',
+                borderRadius: '4px',
+                minWidth: '150px',
+              }}
+              onChange={e => {
                 const target = e.target as HTMLSelectElement;
                 addFilter('tag', target.value);
                 target.value = '';
@@ -115,7 +133,7 @@ export function FilterBar() {
               value=""
             >
               <option value="">{t('filters.select')}</option>
-              {allTags.map((tag) => (
+              {allTags.map(tag => (
                 <option key={tag} value={tag}>
                   #{tag}
                 </option>
@@ -126,8 +144,13 @@ export function FilterBar() {
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             <label style={{ fontWeight: 500, fontSize: '0.9rem' }}>{t('filters.category')}:</label>
             <select
-              style={{ padding: '0.5rem', border: '1px solid #cbd5e0', borderRadius: '4px', minWidth: '150px' }}
-              onChange={(e) => {
+              style={{
+                padding: '0.5rem',
+                border: '1px solid #cbd5e0',
+                borderRadius: '4px',
+                minWidth: '150px',
+              }}
+              onChange={e => {
                 const target = e.target as HTMLSelectElement;
                 addFilter('category', target.value);
                 target.value = '';
@@ -135,7 +158,7 @@ export function FilterBar() {
               value=""
             >
               <option value="">{t('filters.select')}</option>
-              {allCategories.map((cat) => (
+              {allCategories.map(cat => (
                 <option key={cat} value={cat}>
                   {cat}
                 </option>
@@ -146,8 +169,13 @@ export function FilterBar() {
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             <label style={{ fontWeight: 500, fontSize: '0.9rem' }}>{t('filters.user')}:</label>
             <select
-              style={{ padding: '0.5rem', border: '1px solid #cbd5e0', borderRadius: '4px', minWidth: '150px' }}
-              onChange={(e) => {
+              style={{
+                padding: '0.5rem',
+                border: '1px solid #cbd5e0',
+                borderRadius: '4px',
+                minWidth: '150px',
+              }}
+              onChange={e => {
                 const target = e.target as HTMLSelectElement;
                 addFilter('user', normalizeUserId(target.value));
                 target.value = '';
@@ -155,7 +183,7 @@ export function FilterBar() {
               value=""
             >
               <option value="">{t('filters.select')}</option>
-              {allUsers.map((user) => (
+              {allUsers.map(user => (
                 <option key={user} value={user}>
                   {user}
                 </option>
@@ -166,8 +194,13 @@ export function FilterBar() {
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             <label style={{ fontWeight: 500, fontSize: '0.9rem' }}>{t('filters.priority')}:</label>
             <select
-              style={{ padding: '0.5rem', border: '1px solid #cbd5e0', borderRadius: '4px', minWidth: '150px' }}
-              onChange={(e) => {
+              style={{
+                padding: '0.5rem',
+                border: '1px solid #cbd5e0',
+                borderRadius: '4px',
+                minWidth: '150px',
+              }}
+              onChange={e => {
                 const target = e.target as HTMLSelectElement;
                 addFilter('priority', target.value);
                 target.value = '';
@@ -175,7 +208,7 @@ export function FilterBar() {
               value=""
             >
               <option value="">{t('filters.select')}</option>
-              {allPriorities.map((pri) => (
+              {allPriorities.map(pri => (
                 <option key={pri} value={pri}>
                   {pri}
                 </option>

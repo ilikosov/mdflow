@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+dist/
+build/
+coverage/
+
+# Build outputs
+packages/ui/dist/
+packages/server/dist/
+
+# Environment variables
+.env
+.env.local
+*.env.*
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Generated files
+*.log
+*.min.*
+*.map
+
+# Test coverage
+.nyc_output/
+.mypy_cache/
+.pytest_cache/
+.jest/
+
+# TypeScript declaration files
+*.d.ts
+
+# HTML file (might have specific formatting)
+task-manager.html
