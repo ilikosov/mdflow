@@ -64,6 +64,22 @@ export function FilterBar() {
           }}
         >
           <div style={{ position: 'relative', maxWidth: '600px', width: '100%' }}>
+            <label
+              htmlFor="globalSearchInput"
+              style={{
+                position: 'absolute',
+                width: '1px',
+                height: '1px',
+                padding: 0,
+                margin: '-1px',
+                overflow: 'hidden',
+                clip: 'rect(0, 0, 0, 0)',
+                whiteSpace: 'nowrap',
+                border: 0,
+              }}
+            >
+              {t('filters.search')}
+            </label>
             <input
               type="text"
               id="globalSearchInput"
@@ -114,7 +130,7 @@ export function FilterBar() {
           }}
         >
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-            <label for="filter.tags" style={{ fontWeight: 500, fontSize: '0.9rem' }}>
+            <label htmlFor="filter.tags" style={{ fontWeight: 500, fontSize: '0.9rem' }}>
               {t('filters.tags')}:
             </label>
             <select
@@ -142,8 +158,11 @@ export function FilterBar() {
           </div>
 
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-            <label style={{ fontWeight: 500, fontSize: '0.9rem' }}>{t('filters.category')}:</label>
+            <label htmlFor="filter.category" style={{ fontWeight: 500, fontSize: '0.9rem' }}>
+              {t('filters.category')}:
+            </label>
             <select
+              id="filter.category"
               style={{
                 padding: '0.5rem',
                 border: '1px solid #cbd5e0',
@@ -167,8 +186,11 @@ export function FilterBar() {
           </div>
 
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-            <label style={{ fontWeight: 500, fontSize: '0.9rem' }}>{t('filters.user')}:</label>
+            <label htmlFor="filter.user" style={{ fontWeight: 500, fontSize: '0.9rem' }}>
+              {t('filters.user')}:
+            </label>
             <select
+              id="filter.user"
               style={{
                 padding: '0.5rem',
                 border: '1px solid #cbd5e0',
@@ -192,8 +214,11 @@ export function FilterBar() {
           </div>
 
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-            <label style={{ fontWeight: 500, fontSize: '0.9rem' }}>{t('filters.priority')}:</label>
+            <label htmlFor="filter.priority" style={{ fontWeight: 500, fontSize: '0.9rem' }}>
+              {t('filters.priority')}:
+            </label>
             <select
+              id="filter.priority"
               style={{
                 padding: '0.5rem',
                 border: '1px solid #cbd5e0',
