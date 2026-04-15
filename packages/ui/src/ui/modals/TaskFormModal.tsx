@@ -157,8 +157,9 @@ export function TaskFormModal() {
     >
       <form onSubmit={handleSubmit}>
         <div class="form-group">
-          <label>{t('taskForm.titleLabel')}</label>
+          <label htmlFor="taskForm-title">{t('taskForm.titleLabel')}</label>
           <input
+            id="taskForm-title"
             type="text"
             required
             value={formData.title}
@@ -166,8 +167,9 @@ export function TaskFormModal() {
           />
         </div>
         <div class="form-group">
-          <label>{t('taskForm.columnLabel')}</label>
+          <label htmlFor="taskForm-status">{t('taskForm.columnLabel')}</label>
           <select
+            id="taskForm-status"
             value={formData.status}
             onInput={e => handleChange('status', (e.target as HTMLSelectElement).value)}
           >
@@ -179,8 +181,9 @@ export function TaskFormModal() {
           </select>
         </div>
         <div class="form-group">
-          <label>{t('taskForm.priorityLabel')}</label>
+          <label htmlFor="taskForm-priority">{t('taskForm.priorityLabel')}</label>
           <select
+            id="taskForm-priority"
             value={formData.priority}
             onInput={e => handleChange('priority', (e.target as HTMLSelectElement).value)}
           >
@@ -193,8 +196,9 @@ export function TaskFormModal() {
           </select>
         </div>
         <div class="form-group">
-          <label>{t('taskForm.categoryLabel')}</label>
+          <label htmlFor="taskForm-category">{t('taskForm.categoryLabel')}</label>
           <input
+            id="taskForm-category"
             type="text"
             placeholder={t('taskForm.categoryPlaceholder')}
             list="categoryOptions"
@@ -208,8 +212,9 @@ export function TaskFormModal() {
           </datalist>
         </div>
         <div class="form-group">
-          <label>{t('taskForm.assignedLabel')}</label>
+          <label htmlFor="taskForm-assignees">{t('taskForm.assignedLabel')}</label>
           <input
+            id="taskForm-assignees"
             type="text"
             placeholder={t('taskForm.assignedPlaceholder')}
             list="userOptions"
@@ -224,32 +229,36 @@ export function TaskFormModal() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
           <div class="form-group">
-            <label>{t('taskForm.createdLabel')}</label>
+            <label htmlFor="taskForm-created">{t('taskForm.createdLabel')}</label>
             <input
+              id="taskForm-created"
               type="date"
               value={formData.created}
               onInput={e => handleChange('created', (e.target as HTMLInputElement).value)}
             />
           </div>
           <div class="form-group">
-            <label>{t('taskForm.startedLabel')}</label>
+            <label htmlFor="taskForm-started">{t('taskForm.startedLabel')}</label>
             <input
+              id="taskForm-started"
               type="date"
               value={formData.started}
               onInput={e => handleChange('started', (e.target as HTMLInputElement).value)}
             />
           </div>
           <div class="form-group">
-            <label>{t('taskForm.dueLabel')}</label>
+            <label htmlFor="taskForm-due">{t('taskForm.dueLabel')}</label>
             <input
+              id="taskForm-due"
               type="date"
               value={formData.due}
               onInput={e => handleChange('due', (e.target as HTMLInputElement).value)}
             />
           </div>
           <div class="form-group">
-            <label>{t('taskForm.completedLabel')}</label>
+            <label htmlFor="taskForm-completed">{t('taskForm.completedLabel')}</label>
             <input
+              id="taskForm-completed"
               type="date"
               value={formData.completed}
               onInput={e => handleChange('completed', (e.target as HTMLInputElement).value)}
@@ -257,8 +266,9 @@ export function TaskFormModal() {
           </div>
         </div>
         <div class="form-group">
-          <label>{t('taskForm.tagsLabel')}</label>
+          <label htmlFor="taskForm-tags">{t('taskForm.tagsLabel')}</label>
           <input
+            id="taskForm-tags"
             type="text"
             placeholder={t('taskForm.tagsPlaceholder')}
             list="tagOptions"
@@ -273,17 +283,19 @@ export function TaskFormModal() {
           </datalist>
         </div>
         <div class="form-group">
-          <label>{t('taskForm.descriptionLabel')}</label>
+          <label htmlFor="taskForm-description">{t('taskForm.descriptionLabel')}</label>
           <textarea
+            id="taskForm-description"
             rows={3}
             value={formData.description}
             onInput={e => handleChange('description', (e.target as HTMLTextAreaElement).value)}
           />
         </div>
         <div class="form-group">
-          <label>{t('taskForm.subtasksLabel')}</label>
+          <label htmlFor="taskForm-newSubtask">{t('taskForm.subtasksLabel')}</label>
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
             <input
+              id="taskForm-newSubtask"
               type="text"
               placeholder={t('taskForm.subtaskPlaceholder')}
               value={newSubtask}
@@ -338,8 +350,9 @@ export function TaskFormModal() {
           )}
         </div>
         <div class="form-group">
-          <label>{t('taskForm.notesLabel')}</label>
+          <label htmlFor="taskForm-notes">{t('taskForm.notesLabel')}</label>
           <textarea
+            id="taskForm-notes"
             rows={5}
             placeholder={t('taskForm.notesPlaceholder')}
             value={formData.notes}
